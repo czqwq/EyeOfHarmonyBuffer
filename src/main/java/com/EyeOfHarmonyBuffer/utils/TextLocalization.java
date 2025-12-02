@@ -112,9 +112,11 @@ public class TextLocalization {
 
     public static final String EOHB_Harmony;
     public static final String EOHB_Harmony_Tooltip;
-    public static final String EOHB_ChengDuHeart;
+
+    public static final String EOHB_ChengDuHeart_Tooltip_00;
     public static final String EOHB_ChengDuHeart_Tooltip_01;
-    public static final String EOHB_ChengDuHeart_Tooltip_02;
+    public static final String EOHB_Monkey_Tooltip_00;
+    public static final String EOHB_Monkey_Tooltip_01;
 
     public static final String EOHB_Recipe_SubstanceReshapingDevice;
     public static final String EOHB_Recipe_BlueDogFountain;
@@ -253,9 +255,10 @@ public class TextLocalization {
         //物品
         EOHB_Harmony = TextHandler.texter("Harmony","EOHB_Harmony");
         EOHB_Harmony_Tooltip = TextHandler.texter("Harmony","EOHB_Harmony");
-        EOHB_ChengDuHeart = TextHandler.texter("Heart Of ChengDu","chengdu_heart");
-        EOHB_ChengDuHeart_Tooltip_01 = TextHandler.texter("A... thing? Or maybe a gem? Looks pretty valuable","EOHB_ChengDuHeart_Tooltip_01");
-        EOHB_ChengDuHeart_Tooltip_02 = TextHandler.texter("and judging by where it came from… yeah, let’s not think too hard about that.","EOHB_ChengDuHeart_Tooltip_02");
+        EOHB_ChengDuHeart_Tooltip_00 = TextHandler.texter("A... thing? Or maybe a gem? Looks pretty valuable","EOHB_ChengDuHeart_Tooltip_00");
+        EOHB_ChengDuHeart_Tooltip_01 = TextHandler.texter("and judging by where it came from… yeah, let’s not think too hard about that.","EOHB_ChengDuHeart_Tooltip_01");
+        EOHB_Monkey_Tooltip_00 = TextHandler.texter("Legendary Poop Handler of the Squad!","EOHB_Monkey_Tooltip_00");
+        EOHB_Monkey_Tooltip_01 = TextHandler.texter("Monkeys and poop really are a pair of star-crossed lovers...","EOHB_Monkey_Tooltip_01");
 
         //配方池
         EOHB_Recipe_SubstanceReshapingDevice = TextHandler.texter("Substance Reshaping Device","EOHB_Recipe_SubstanceReshapingDevice");

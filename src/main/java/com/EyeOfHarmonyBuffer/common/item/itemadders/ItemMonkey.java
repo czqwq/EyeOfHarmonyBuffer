@@ -10,13 +10,13 @@ import java.util.List;
 import static com.EyeOfHarmonyBuffer.client.EOHBCreativeTabs.tabMetaItem01;
 import static com.EyeOfHarmonyBuffer.utils.TextLocalization.*;
 
-public class ItemChengDuHeart extends Item {
+public class ItemMonkey extends Item {
 
-    public ItemChengDuHeart() {
+    public ItemMonkey() {
         super();
 
-        this.setUnlocalizedName("chengdu_heart");
-        this.setTextureName(EyeOfHarmonyBuffer.MODID + ":ChengDuHeart");
+        this.setUnlocalizedName("Monkey");
+        this.setTextureName(EyeOfHarmonyBuffer.MODID + ":Monkey");
         this.setCreativeTab(tabMetaItem01);
         this.setMaxStackSize(64);
     }
@@ -24,7 +24,7 @@ public class ItemChengDuHeart extends Item {
     @Override
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean advanced) {
-        list.add(EOHB_ChengDuHeart_Tooltip_00);
-        list.add(EOHB_ChengDuHeart_Tooltip_01);
+        list.add(EOHB_Monkey_Tooltip_00);
+        list.add(EOHB_Monkey_Tooltip_01);
     }
 }
