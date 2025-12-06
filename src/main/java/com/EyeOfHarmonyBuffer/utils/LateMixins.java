@@ -26,6 +26,7 @@ public class LateMixins implements ILateMixinLoader {
             "Accessor.TreatedWater.Grade4WaterPurificationAccessor",
             "Accessor.PCBFactory.PCBFactoryParallelAccessor",
             "Accessor.PCBFactory.PCBFactoryParallelThisAccessor",
+            "Accessor.GodOfForgeModule.MTEExoticModuleAccessor",
             "AlloyBlastSmelterMixin",
             "BioLab.BioLabAdvancedMixin",
             "BioLab.BioLabMixin",

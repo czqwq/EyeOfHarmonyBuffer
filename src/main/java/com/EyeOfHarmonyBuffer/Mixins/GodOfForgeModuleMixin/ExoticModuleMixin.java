@@ -1,5 +1,6 @@
 package com.EyeOfHarmonyBuffer.Mixins.GodOfForgeModuleMixin;
 
+import com.EyeOfHarmonyBuffer.Mixins.Accessor.GodOfForgeModule.MTEExoticModuleAccessor;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.enums.TierEU;
 import gregtech.api.logic.ProcessingLogic;
@@ -153,9 +154,10 @@ public abstract class ExoticModuleMixin extends MTEBaseModule {
                 @Override
                 protected Stream<GTRecipe> findRecipeMatches(@Nullable RecipeMap<?> map) {
                     if (!recipeInProgress) {
+                        MTEExoticModuleAccessor accessor = (MTEExoticModuleAccessor) (Object) ExoticModuleMixin.this;
                         plasmaRecipe = magmatterMode
-                            ? generateMagmatterRecipe()
-                            : generateQuarkGluonRecipe();
+                            ? accessor.invokeGenerateMagmatterRecipe()
+                            : accessor.invokeGenerateQuarkGluonRecipe();
                     }
                     return GTStreamUtil.ofNullable(plasmaRecipe);
                 }
