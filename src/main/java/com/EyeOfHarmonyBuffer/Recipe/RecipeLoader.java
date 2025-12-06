@@ -23,6 +23,7 @@ public class RecipeLoader {
             new SubstanceReshapingDeviceRecipes(),
             new BlueDogMachineRecipes(),
             new MaterialsRecipes(),
+            new ItemRecipes(),
         };
         for (IRecipePool recipePool : recipePools) {
             recipePool.loadRecipes();
@@ -80,6 +81,14 @@ public class RecipeLoader {
             'C', ItemList.Hull_LV.get(1),
             'D', getModItem(Chisel.ID, "hempcrete",1,11),
             'E', GTCMItemList.ChengDuHeart.get(1)
+        );
+
+        GameRegistry.addRecipe(
+            GTCMItemList.Monkey.get(1),
+            "...",
+            ".A.",
+            "...",
+            'A', GTCMItemList.Shit.get(1)
         );
     }
 }

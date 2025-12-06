@@ -117,6 +117,7 @@ public class TextLocalization {
     public static final String EOHB_ChengDuHeart_Tooltip_01;
     public static final String EOHB_Monkey_Tooltip_00;
     public static final String EOHB_Monkey_Tooltip_01;
+    public static final String EOHB_Shit_Tooltip_00;
 
     public static final String EOHB_Recipe_SubstanceReshapingDevice;
     public static final String EOHB_Recipe_BlueDogFountain;
@@ -259,11 +260,12 @@ public class TextLocalization {
         EOHB_ChengDuHeart_Tooltip_01 = TextHandler.texter("and judging by where it came from… yeah, let’s not think too hard about that.","EOHB_ChengDuHeart_Tooltip_01");
         EOHB_Monkey_Tooltip_00 = TextHandler.texter("Legendary Poop Handler of the Squad!","EOHB_Monkey_Tooltip_00");
         EOHB_Monkey_Tooltip_01 = TextHandler.texter("Monkeys and poop really are a pair of star-crossed lovers...","EOHB_Monkey_Tooltip_01");
+        EOHB_Shit_Tooltip_00 = TextHandler.texter("As you can see... this is a pile of... poop.","EOHB_Shit_Tooltip_00");
 
         //配方池
         EOHB_Recipe_SubstanceReshapingDevice = TextHandler.texter("Substance Reshaping Device","EOHB_Recipe_SubstanceReshapingDevice");
         EOHB_Recipe_BlueDogFountain = TextHandler.texter("Blue Dog Fountain","EOHB_Recipe_BlueDogFountain");
         EOHB_Recipe_BlueDogFountainMAX = TextHandler.texter("Blue Dog Fountain MAX","EOHB_Recipe_BlueDogFountainMAX");
-        EOHB_Recipe_MonkeyShit = TextHandler.texter("Monkey Shit","EOHB_Recipe_MonkeyShit");
+        EOHB_Recipe_MonkeyShit = TextHandler.texter("The Holy Royal High Priest of Poop Transportation","EOHB_Recipe_MonkeyShit");
     }
 }

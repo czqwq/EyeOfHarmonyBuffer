@@ -1,5 +1,6 @@
 package com.EyeOfHarmonyBuffer.Recipe;
 
+import appeng.integration.modules.GT;
 import com.EyeOfHarmonyBuffer.Config.MachineLoaderConfig;
 import com.EyeOfHarmonyBuffer.common.GTCMItemList;
 import com.EyeOfHarmonyBuffer.utils.IRecipePool;
@@ -7,11 +8,13 @@ import gregtech.api.enums.*;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.recipe.Scanning;
+import gtPlusPlus.core.fluids.GTPPFluids;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsElements;
 import gtPlusPlus.core.material.Particle;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -319,6 +322,40 @@ public final class MachineBlockRecipes implements IRecipePool {
             )
             .duration(20000000 * SECONDS)
             .eut(TierEU.RECIPE_MAX)
+            .addTo(AssemblyLine);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, GTCMItemList.Monkey.get(1))
+            .metadata(SCANNING, new Scanning(500 * MINUTES, TierEU.RECIPE_UEV))
+            .itemInputsUnsafe(
+                GTCMItemList.Shit.get(64),
+                GTCMItemList.Shit.get(64),
+                GTCMItemList.Shit.get(64),
+                GTCMItemList.Shit.get(64),
+
+                GTCMItemList.Monkey.get(64),
+                GTCMItemList.Monkey.get(64),
+                GTCMItemList.Monkey.get(64),
+                GTCMItemList.Monkey.get(64),
+
+                GTCMItemList.Shit.get(64),
+                GTCMItemList.Shit.get(64),
+                GTCMItemList.Shit.get(64),
+                GTCMItemList.Shit.get(64),
+
+                GTCMItemList.Monkey.get(64),
+                GTCMItemList.Monkey.get(64),
+                GTCMItemList.Monkey.get(64),
+                GTCMItemList.Monkey.get(64)
+            )
+            .fluidInputs(
+                new FluidStack(GTPPFluids.FertileManureSlurry, 10000000)
+            )
+            .itemOutputs(
+                GTCMItemList.MonkeyShitS.get(1)
+            )
+            .duration(200 * SECONDS)
+            .eut(TierEU.RECIPE_EV)
             .addTo(AssemblyLine);
 
     }

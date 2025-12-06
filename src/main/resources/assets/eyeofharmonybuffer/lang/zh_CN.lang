@@ -106,9 +106,9 @@ Tooltip_BlueDogMachine_03=§8哦，你最好不要看到它是从§4哪里喷出
 Tooltip_BlueDogMachine_04=§3“他看起来不太舒服？”§r
 Tooltip_BlueDogMachine_05=§5“并不，§d他或许乐在其中§5……”§r
 Tooltip_BlueDogMachine_06=§a祝你玩得开心！§b你会喜欢他的！§r
-NameMonkeyShit=爱搬屎的猴子
-Tooltip_MonkeyShit_MachineType=爱搬屎的猴子
-Tooltip_MonkeyShit_Controller=爱搬屎的猴子的控制器方块
+NameMonkeyShit=圣皇家搬屎大祭司
+Tooltip_MonkeyShit_MachineType=圣皇家搬屎大祭司
+Tooltip_MonkeyShit_Controller=圣皇家搬屎大祭司的控制器方块
 Tooltip_MonkeyShit_00=§6§l无情的搬屎机器！§r
 Tooltip_MonkeyShit_01=§e哦天哪，§c他是从哪里找到的这些玩意？！§r
 Tooltip_MonkeyShit_02=§7有的时候§d他离神很近§7，§8但是离人很远了§7……§r
@@ -121,7 +121,7 @@ GT5U.gui.text.SingularityStabilizationRingCasingsLive=奇点稳定环等级不�
 EOHB_Recipe_SubstanceReshapingDevice=物质重塑仪
 EOHB_Recipe_BlueDogFountain=蓝狗喷泉
 EOHB_Recipe_BlueDogFountainMAX=蓝狗喷泉Max
-EOHB_Recipe_MonkeyShit=爱搬屎的猴子
+EOHB_Recipe_MonkeyShit=圣皇家搬屎大祭司
 
 #item
 EOHB_Harmony=鸿蒙
@@ -132,3 +132,5 @@ EOHB_ChengDuHeart_Tooltip_01=似乎是从某人身后掉出来的...不要深究
 item.Monkey.name=猴子
 EOHB_Monkey_Tooltip_00=小团体传奇搬屎员！
 EOHB_Monkey_Tooltip_01=猴子和屎真是一对苦命鸳鸯啊......
+item.Shit.name=屎
+EOHB_Shit_Tooltip_00=如你所见 这就是一坨...屎...

@@ -106,9 +106,9 @@ Tooltip_BlueDogMachine_03=Oh, and you’d better not look too closely at where t
 Tooltip_BlueDogMachine_04=“He doesn’t look very comfortable, does he?”
 Tooltip_BlueDogMachine_05=“Not really. He might actually be enjoying it…”
 Tooltip_BlueDogMachine_06=Enjoy yourself — you’re definitely going to like him!
-NameMonkeyShit=Monkey Shit
-Tooltip_MonkeyShit_MachineType=Monkey Shit
-Tooltip_MonkeyShit_Controller=Controller Block of Monkey Shit
+NameMonkeyShit=The Holy Royal High Priest of Poop Transportation
+Tooltip_MonkeyShit_MachineType=The Holy Royal High Priest of Poop Transportation
+Tooltip_MonkeyShit_Controller=Controller Block of The Holy Royal High Priest of Poop Transportation
 Tooltip_MonkeyShit_00=The Relentless Poop Mover!
 Tooltip_MonkeyShit_01=Seriously?! Where on earth did he get all this crap!?
 Tooltip_MonkeyShit_02=At times, he walks near the gods... yet strays far from mankind.
@@ -121,7 +121,7 @@ GT5U.gui.text.SingularityStabilizationRingCasingsLive=Singularity Stabilization 
 EOHB_Recipe_SubstanceReshapingDevice=Substance Reshaping Device
 EOHB_Recipe_BlueDogFountain=Blue Dog Fountain
 EOHB_Recipe_BlueDogFountainMAX=Blue Dog Fountain Max
-EOHB_Recipe_MonkeyShit=Monkey Shit
+EOHB_Recipe_MonkeyShit=The Holy Royal High Priest of Poop Transportation
 
 #item
 EOHB_Harmony=Harmony
@@ -132,3 +132,5 @@ EOHB_ChengDuHeart_Tooltip_01=and judging by where it came from… yeah, let’s 
 item.Monkey.name=Monkey
 EOHB_Monkey_Tooltip_00=Legendary Poop Handler of the Squad!
 EOHB_Monkey_Tooltip_01=Monkeys and poop really are a pair of star-crossed lovers...
+item.Shit.name=Shit
+EOHB_Shit_Tooltip_00=As you can see... this is a pile of... poop.
