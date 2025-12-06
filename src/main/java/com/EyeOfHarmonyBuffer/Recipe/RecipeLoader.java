@@ -8,7 +8,6 @@ import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.getModItem;
@@ -24,6 +23,17 @@ public class RecipeLoader {
             new SubstanceReshapingDeviceRecipes(),
             new BlueDogMachineRecipes(),
             new MaterialsRecipes(),
+            new ItemRecipes(),
+        };
+        for (IRecipePool recipePool : recipePools) {
+            recipePool.loadRecipes();
+        }
+    }
+
+    public static void loadRecipesLate() {
+
+        IRecipePool[] recipePools = new IRecipePool[] {
+            new MonkeyShitRecipes(),
         };
         for (IRecipePool recipePool : recipePools) {
             recipePool.loadRecipes();
@@ -71,6 +81,14 @@ public class RecipeLoader {
             'C', ItemList.Hull_LV.get(1),
             'D', getModItem(Chisel.ID, "hempcrete",1,11),
             'E', GTCMItemList.ChengDuHeart.get(1)
+        );
+
+        GameRegistry.addRecipe(
+            GTCMItemList.Monkey.get(1),
+            "...",
+            ".A.",
+            "...",
+            'A', GTCMItemList.Shit.get(1)
         );
     }
 }
