@@ -36,6 +36,8 @@ public class TextLocalization {
     public static final String EOHB_Open_Config;
     public static final String EOHB_Opened;
     public static final String EOHB_Open_Failed;
+    public static final String EOHB_WirelessMode_On;
+    public static final String EOHB_WirelessMode_Off;
 
     public static final String NameVendingMachines;
     public static final String Tooltip_VendingMachines_MachineType;
@@ -52,6 +54,7 @@ public class TextLocalization {
     public static final String Tooltip_WindTurbine_01;
     public static final String Tooltip_WindTurbine_02;
     public static final String Tooltip_WindTurbine_03;
+    public static final String Tooltip_WindTurbine_04;
     public static final String StructureInfo_WindTurbine_00;
     public static final String StructureInfo_WindTurbine_01;
     public static final String StructureInfo_WindTurbine_02;
@@ -153,6 +156,8 @@ public class TextLocalization {
         EOHB_Text_SeparatingLine = TextHandler.texter("-----------------------------------------","EOHB_Text_SeparatingLine");
         EOHB_Starry_Miracle_Project = TextHandler.texter("EOHB — Starry Miracle Project","EOHB_Starry_Miracle_Project");
         EOHB_Legendary_Machine_Project = TextHandler.texter("EOHB-Legendary Machine Project","EOHB_Legendary_Machine_Project");
+        EOHB_WirelessMode_On = TextHandler.texter("Wireless mode enabled.","EOHB_WirelessMode_On");
+        EOHB_WirelessMode_Off = TextHandler.texter("Wireless mode disabled.","EOHB_WirelessMode_Off");
 
         //载入提示性文本
         EOHB_Client_PlayerJoin00 = TextHandler.texter("Welcome to use EyeOfHarmonyBuffer!","EOHB_Client_PlayerJoin00");
@@ -189,7 +194,8 @@ public class TextLocalization {
         Tooltip_WindTurbine_01 = TextHandler.texter("The higher the grade of the rotor, the more power it generates.", "Tooltip_WindTurbine_01");
         Tooltip_WindTurbine_02 = TextHandler.texter("The power generation formula is: UHV * Wind Factor * Rotor Level.\n" +
             "The Wind Factor refreshes every 30 seconds and ranges from 0.5 to 1.5.", "Tooltip_WindTurbine_02");
-        Tooltip_WindTurbine_03 = TextHandler.texter("Clean energy! May your skies remain pollution-free!","Tooltip_WindTurbine_03");
+        Tooltip_WindTurbine_03 = TextHandler.texter("Use wire cutters to enable or disable wireless mode!In wireless mode, the structure no longer requires a power module.","Tooltip_WindTurbine_03");
+        Tooltip_WindTurbine_04 = TextHandler.texter("Clean energy! May your skies remain pollution-free!","Tooltip_WindTurbine_04");
         StructureInfo_WindTurbine_00 = TextHandler.texter("The rotor material is classified as follows:", "StructureInfo_WindTurbine_00");
         StructureInfo_WindTurbine_01 = TextHandler.texter("Wood-Level 1-1x", "StructureInfo_WindTurbine_01");
         StructureInfo_WindTurbine_02 = TextHandler.texter("Iron-Level 2-4x", "StructureInfo_WindTurbine_02");

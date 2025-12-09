@@ -2,6 +2,7 @@ package com.EyeOfHarmonyBuffer.common.Machine;
 
 import com.EyeOfHarmonyBuffer.common.Block.BlockRegister;
 import com.EyeOfHarmonyBuffer.utils.TextLocalization;
+import com.EyeOfHarmonyBuffer.utils.Utils;
 import com.gtnewhorizon.structurelib.alignment.constructable.IConstructable;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -20,6 +21,7 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.shutdown.ShutDownReason;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,8 +31,10 @@ import org.jetbrains.annotations.NotNull;
 import tectech.thing.casing.TTCasingsContainer;
 
 import javax.annotation.Nonnull;
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.EyeOfHarmonyBuffer.utils.TextLocalization.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
@@ -41,18 +45,20 @@ import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Textures.BlockIcons.BLOCK_PLASCRETE;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
 
 public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements IConstructable, ISurvivalConstructable {
 
     private IStructureDefinition<EOHB_WindTurbine> multiDefinition = null;
     protected long leftEnergy = 0;
-    private ItemStack target;
     private static final Map<ItemStack, Integer> ROTOR_VALUES = new HashMap<>();
     private static final long BASE_POWER = 2097152;
     private long trueOutput = 0;
     private double lastWindSpeed = 1.0;
     private long lastUpdateTick = 0;
     private boolean modelCreated = false;
+    private UUID ownerUUID;
+    private boolean MachineWirelessMode = false;
 
     private final int MODEL_OFFSET_Y = 56;
 
@@ -172,6 +178,7 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
             .addInfo(Tooltip_WindTurbine_01)
             .addInfo(Tooltip_WindTurbine_02)
             .addInfo(Tooltip_WindTurbine_03)
+            .addInfo(Tooltip_WindTurbine_04)
             .addSeparator()
             .addStructureInfo(StructureInfo_WindTurbine_00)
             .addStructureInfo(EOHB_Text_SeparatingLine)
@@ -201,6 +208,9 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
 
     @Override
     public boolean checkMachine_EM(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        if(MachineWirelessMode){
+            return structureCheck_EM(mName, 11, 59, 0);
+        }
         return structureCheck_EM(mName, 11, 59, 0)
             && mDynamoHatches.size() + eDynamoMulti.size() == 1;
     }
@@ -214,6 +224,12 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new EOHB_WindTurbine(this.mName);
+    }
+
+    @Override
+    public void onFirstTick_EM(IGregTechTileEntity aBaseMetaTileEntity) {
+        super.onFirstTick_EM(aBaseMetaTileEntity);
+        this.ownerUUID = aBaseMetaTileEntity.getOwnerUuid();
     }
 
     public EOHB_WindTurbine(String name){
@@ -230,7 +246,7 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
     }
 
     private int checkRotor(ItemStack inventory) {
-        target = this.getControllerSlot();
+        ItemStack target = this.getControllerSlot();
         if (target == null) return 0;
 
         for (Map.Entry<ItemStack, Integer> entry : ROTOR_VALUES.entrySet()) {
@@ -259,6 +275,7 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
     @Override
     public boolean onRunningTick(ItemStack stack) {
         if (this.getBaseMetaTileEntity().isServerSide()) {
+
             if (mMaxProgresstime != 0 && mProgresstime % 20 == 0) {
                 int rotorLevel = this.checkRotor(this.getControllerSlot());
                 if (rotorLevel > 0) {
@@ -270,6 +287,7 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
                     this.trueOutput = 0;
                 }
             }
+
             addAutoEnergy();
 
             if (this.trueOutput > 0) {
@@ -285,36 +303,65 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
         return true;
     }
 
-    public void addAutoEnergy() {
-        long outputPower = this.trueOutput;
-        if (!this.mDynamoHatches.isEmpty()) {
-            for (MTEHatch tHatch : this.mDynamoHatches) {
-                long voltage = tHatch.maxEUOutput();
-                long outputAmperes;
+    @Override
+    public boolean onWireCutterRightClick(
+        ForgeDirection side,
+        ForgeDirection wrenchingSide,
+        EntityPlayer aPlayer,
+        float aX, float aY, float aZ,
+        ItemStack aTool
+    ) {
+        if (this.getBaseMetaTileEntity().isServerSide()) {
+            this.MachineWirelessMode = !this.MachineWirelessMode;
 
-                if (outputPower >= voltage) {
-                    leftEnergy += outputPower;
-                    outputAmperes = leftEnergy / voltage;
-                    leftEnergy -= outputAmperes * voltage;
-                    addEnergyOutput_EM(voltage, outputAmperes);
-                } else {
-                    addEnergyOutput_EM(outputPower, 1);
+            String message = this.MachineWirelessMode
+                ? EnumChatFormatting.GREEN + EOHB_WirelessMode_On
+                : EnumChatFormatting.RED + EOHB_WirelessMode_Off;
+
+            GTUtility.sendChatToPlayer(aPlayer, message);
+            return true;
+        }
+        return false;
+    }
+
+    public void addAutoEnergy(){
+        if(!MachineWirelessMode){
+            long outputPower = this.trueOutput;
+            if (!this.mDynamoHatches.isEmpty()) {
+                for (MTEHatch tHatch : this.mDynamoHatches) {
+                    long voltage = tHatch.maxEUOutput();
+                    long outputAmperes;
+
+                    if (outputPower >= voltage) {
+                        leftEnergy += outputPower;
+                        outputAmperes = leftEnergy / voltage;
+                        leftEnergy -= outputAmperes * voltage;
+                        addEnergyOutput_EM(voltage, outputAmperes);
+                    } else {
+                        addEnergyOutput_EM(outputPower, 1);
+                    }
                 }
             }
-        }
-        if(!this.eDynamoMulti.isEmpty()) {
-            for (MTEHatch tHatch : this.eDynamoMulti) {
-                long voltage = tHatch.maxEUOutput();
-                long outputAmperes;
+            if(!this.eDynamoMulti.isEmpty()) {
+                for (MTEHatch tHatch : this.eDynamoMulti) {
+                    long voltage = tHatch.maxEUOutput();
+                    long outputAmperes;
 
-                if (outputPower >= voltage) {
-                    leftEnergy += outputPower;
-                    outputAmperes = leftEnergy / voltage;
-                    leftEnergy -= outputAmperes * voltage;
-                    addEnergyOutput_EM(voltage, outputAmperes);
-                } else {
-                    addEnergyOutput_EM(outputPower, 1);
+                    if (outputPower >= voltage) {
+                        leftEnergy += outputPower;
+                        outputAmperes = leftEnergy / voltage;
+                        leftEnergy -= outputAmperes * voltage;
+                        addEnergyOutput_EM(voltage, outputAmperes);
+                    } else {
+                        addEnergyOutput_EM(outputPower, 1);
+                    }
                 }
+            }
+        } else{
+            BigInteger wirelessEnergy = BigInteger.valueOf(trueOutput);
+
+            if (!addEUToGlobalEnergyMap(ownerUUID, wirelessEnergy)) {
+                System.out.println("无线能量传输失败！");
             }
         }
     }
@@ -324,23 +371,21 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
         String[] info = super.getInfoData();
         info[4] = "Currently generates: " + EnumChatFormatting.RED
             + GTUtility.formatNumbers(Math.abs(this.trueOutput))
-            + EnumChatFormatting.RESET
-            + " EU/t";
+            + EnumChatFormatting.RESET + " EU/t";
         info[6] = "Problems: " + EnumChatFormatting.RED
             + (this.getIdealStatus() - this.getRepairStatus())
-            + EnumChatFormatting.RESET
-            + " Coefficient Of Wind Power: "
-            + EnumChatFormatting.YELLOW
-            + lastWindSpeed
-            + EnumChatFormatting.RESET
-            + " ";
+            + EnumChatFormatting.RESET + " Coefficient Of Wind Power: "
+            + EnumChatFormatting.YELLOW + lastWindSpeed + EnumChatFormatting.RESET;
+        info[7] = "Wireless Mode: " + (MachineWirelessMode ?
+            EnumChatFormatting.GREEN + "ENABLED" : EnumChatFormatting.RED + "DISABLED");
         return info;
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         this.leftEnergy = aNBT.getLong("mLeftEnergy");
-        this.trueOutput = aNBT.getInteger("mbasicOutput");
+        this.trueOutput = aNBT.getLong("mbasicOutput");
+        this.MachineWirelessMode = aNBT.getBoolean("MachineWirelessMode");
         super.loadNBTData(aNBT);
     }
 
@@ -348,6 +393,7 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
     public void saveNBTData(NBTTagCompound aNBT) {
         aNBT.setLong("mLeftEnergy", this.leftEnergy);
         aNBT.setLong("mbasicOutput", this.trueOutput);
+        aNBT.setBoolean("MachineWirelessMode", this.MachineWirelessMode);
         super.saveNBTData(aNBT);
     }
 
