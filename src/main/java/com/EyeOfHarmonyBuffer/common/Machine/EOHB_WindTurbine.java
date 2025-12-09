@@ -2,7 +2,6 @@ package com.EyeOfHarmonyBuffer.common.Machine;
 
 import com.EyeOfHarmonyBuffer.common.Block.BlockRegister;
 import com.EyeOfHarmonyBuffer.utils.TextLocalization;
-import com.EyeOfHarmonyBuffer.utils.Utils;
 import com.gtnewhorizon.structurelib.alignment.constructable.IConstructable;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
