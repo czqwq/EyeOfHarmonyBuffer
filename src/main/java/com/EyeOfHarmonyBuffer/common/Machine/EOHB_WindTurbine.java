@@ -210,8 +210,8 @@ public class EOHB_WindTurbine extends MTETooltipMultiBlockBaseEM implements ICon
         if(MachineWirelessMode){
             return structureCheck_EM(mName, 11, 59, 0);
         }
-        return structureCheck_EM(mName, 11, 59, 0)
-            && mDynamoHatches.size() + eDynamoMulti.size() == 1;
+        return structureCheck_EM(mName, 11, 59, 0);
+            /*&& mDynamoHatches.size() + eDynamoMulti.size() == 1;*/
     }
 
     @Override
